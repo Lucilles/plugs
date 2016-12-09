@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery1.11.js"></script>
+	<script src="jquery.raty.js"></script>
+</head>
+<body>
+	<div data-score="3"></div>
+
+
+<script>
+	$(function(){
+	$('div').raty({
+		score:function(){
+			return $(this).attr('data-score')
+		},
+		readOnly:true
+	})
+	})
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
