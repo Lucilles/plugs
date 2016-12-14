@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>分页</title>
+    <link rel="stylesheet" href="font-awesome.min.css">
+     <link rel="stylesheet" href="pagination.css">
+    <script src="jquery1.11.js"></script>
+  <title>列表</title>
+  <style>
+body{
+    padding: 0 0 120px 0 ;
+    margin: 0;
+    background: #eee;
+    color: #000;
+}
+.nav{
+    height: 50px;
+    background: #fff;
+    text-align:center;
+    line-height: 50px; 
+    color:#000;
+}
+.self{
+position:absolute;
+top: 8px;
+right:10px;
+color: #f00;
+text-decoration: none;
+font-size: 14px;
+
+}
+#content{
+min-height: 500px;
+
+}
+.lists{
+	margin-top: 10px;
+
+}
+.lists a{
+	display: block;
+	text-decoration: none;
+	color: #000;
+}
+.list{
+	border-bottom: 1px solid #bbb;
+	display: box;
+    display: -moz-box;
+    display: -webkit-box;
+    width: 100%;
+    background: #fff;
+    position: relative;
+}
+.list .img{
+margin-top: 10px;
+padding: 12px;
+}
+.list .img img{
+ width: 80px;
+height: 80px;
+border-radius: 80px; 
+}
+.list .details{
+    -moz-box-flex:1;
+    -webkit-box-flex:1;
+    box-flex:1;
+    margin-bottom: 10px;
+    padding-top: 10px;
+}
+.list .details p{
+margin: 5px 12px;
+font-size: 14px;
+}	
+
+.pagination{
+    margin-top: 20px;
+}
+.rank{
+list-style: none;
+margin-top: 10px;
+padding: 0;
+height: 40px;
+background:#fff;
+}
+.rank li{
+  float: left;  
+  width: 25%;
+margin:0 15px;  
+line-height: 40px;
+  text-align: center;
+}
+.border{
+    border-bottom: 3px solid #AEF6C1;
+}
+.quality{
+height:28px;
+width: 50px;
+border-radius: 5px;
+text-align: center;
+background: #F7A450;
+position:absolute;
+top: 20px;
+right: 15px;
+padding:3px;
+}
+
+
+
+
+
+  </style>
+ <script src="pagination.js"></script>
+  <script>
+        
+            // This is a very simple demo that shows how a range of elements can
+            // be paginated.
+            // The elements that will be displayed are in a hidden DIV and are
+            // cloned for display. The elements are static, there are no Ajax 
+            // calls involved.
+        
+            /**
+             * Callback function that displays the content.
+             *
+             * Gets called every time the user clicks on a pagination link.
+             *
+             * @param {int} page_index New Page index
+             * @param {jQuery} jq the container with the pagination links as a jQuery object
+             */
+            // function pageselectCallback(page_index, jq){
+            //     var items_per_page=5;
+            //     var max_elem = Math.min((page_index+1) * items_per_page, length);
+            //     var new_content = jQuery('#content div.lists:eq('+page_index+')').clone();
+            //     $('#Searchresult').empty().append(new_content);
+            //     return false;
+            // }
+   function pageselectCallback(page_index, jq){
+        // 从表单获取每页的显示的列表项数目
+        var items_per_page = 2;
+        var max_elem =jQuery('#content div.lists').length;
+
+        $("#Searchresult").html("");
+        // 获取加载元素
+        for(var i=page_index*items_per_page;i<page_index*items_per_page+items_per_page;i++){
+            $("#Searchresult").append($("#content .lists:eq("+i+")").clone());
+        }
+        //阻止单击事件
+        
+        console.log($('#Searchresult'));
+        return false;
+    }
+     /** 
+             * Initialisation function for pagination
+             */
+            function initPagination() {
+                // count entries inside the hidden content
+                var num_entries = jQuery('#content div.lists').length;
+                console.log(num_entries);
+                // Create content inside pagination element
+                $(".pagination").pagination(num_entries, {
+                    callback: pageselectCallback,
+                    items_per_page:2,
+                    current_page:1,
+                    next_text:"Next", // Show only one item per page
+                });
+             }
+            
+            // When document is ready, initialize pagination
+            $(document).ready(function(){      
+                initPagination();
+            });
+            $(function(){
+
+
+
+
+
+            })
+            
+            
+            
+        </script>
+</head>
+<body>
+<div class="nav">列表<a class="self" href="http://xiarongkeji.com/index.php?g=Wap&m=Userinfo&a=index&token=iohonj1458530561&wecha_id={wechat_id}">个人中心</a></div>
+
+<div id="content" style="display:none;">
+<div class="lists">
+  <a href="http://xiarongkeji.com/index.php?g=Wap&m=Merchant&a=details&$token=iohonj1458530561&wecha_id={wechat_id}&id=89">
+        <div class="list">
+         <div class="img">
+           <img src="/Public/Img/4.jpg" alt=""></div>
+         <div class="details">    
+        <p>名字：</p>
+        <p>编号：</p>   
+        <p>地理位置：</p>      
+        <p>擅长品种：</p>
+        <p>店铺签名：</p>
+        <span class="quality">质保</span>
+  </div>  
+  </div>
+    </a>
+</div>
+<div class="lists">
+  <a href="http://xiarongkeji.com/index.php?g=Wap&m=Merchant&a=details&$token=iohonj1458530561&wecha_id={wechat_id}&id=89">
+        <div class="list">
+         <div class="img">
+           <img src="/Public/Img/4.jpg" alt=""></div>
+         <div class="details">    
+        <p>名字：<?php echo $list['store_name']; ?></p>
+        <p>编号：<?php echo $list['m_id']; ?></p>   
+        <p>地理位置：</p>      
+        <p>擅长品种：<?php echo $list['good_variety']; ?></p>
+        <p>店铺签名：<?php echo $list['m_details']; ?></p>
+        <span class="quality">质保</span>
+  </div>  
+  </div>
+    </a>
+</div>
+<div class="lists">
+  <a href="http://xiarongkeji.com/index.php?g=Wap&m=Merchant&a=details&$token=iohonj1458530561&wecha_id={wechat_id}&id=89">
+        <div class="list">
+         <div class="img">
+           <img src="/Public/Img/4.jpg" alt=""></div>
+         <div class="details">    
+        <p>店铺名：<?php echo $list['store_name']; ?></p>
+        <p>编号：<?php echo $list['m_id']; ?></p>   
+        <p>地理位置：</p>      
+        <p>擅长品种：<?php echo $list['good_variety']; ?></p>
+        <p>店铺签名：<?php echo $list['m_details']; ?></p>
+        <span class="quality">质保</span>
+  </div>  
+  </div>
+    </a>
+</div>
+</div>
+
+        <div id="Searchresult">
+            This content will be replaced when pagination inits.
+        </div>
+        <div class="pagination"></div>
+
+</body>
+</html>
