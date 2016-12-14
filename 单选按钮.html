@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<style>
+	/*多选按钮样式*/
+	.check_box{
+		position: relative;
+	}
+.checkboxs{
+    opacity: 0;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 999;
+}
+.checkboxs:checked + label::after {
+content: '';
+position: absolute;
+height: 8px;
+width: 8px;
+top: 4px;
+left: 4px;
+color: #000;
+text-align: center;
+font-size: 0.8em;
+padding: 1px 0 0 0;
+vertical-align: text-top;
+display: block;
+background: #000;
+border-radius: 8px;
+}
+.checkboxs:checked + label {
+    background-color: transparent;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+    color: #243441;
+}
+ .checkboxs + label {
+    background-color: transparent;
+    border: 1px solid #C1CACA;
+    padding: 8px;
+    display: inline-block;
+    position: relative;
+    border-radius: 8px;
+}
+</style>
+
+
+
+
+</head>
+<body>
+	            <div class="check_box dis_none">
+                <input type="radio" value="" class="checkboxs selectItem" name="sex"/>
+                <label></label>
+                女
+            </div>
+            <p></p>
+            	            <div class="check_box dis_none">
+                <input type="radio" name="sex" value="" class="checkboxs selectItem" />
+                <label></label>男
+            </div>
+
+
+
+
+<input type="file" id="file" style="display:none;">
+
+
+            <button onclick="files()">头像</button>
+
+<script>
+	
+var file=document.getElementById("file");
+function files(){
+file.click();
+}
+
+</script>
+
+</body>
+</html>
