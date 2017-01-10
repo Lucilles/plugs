@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<html xmlns="http://www.w3.org/1999/xhtml">  
+<head>  
+    <title></title>  
+    <script src="jquery1.11.js" type="text/javascript"></script>  
+    <script type="text/javascript">  
+    $(function () {  
+        $(".container").each(function (i) {  
+            var divH = $(this).height();  
+            var $p = $("p", $(this)).eq(0);  
+            while ($p.outerHeight() > divH) {  
+                $p.text($p.text().replace(/(\s)*([a-zA-Z0-9]+|\W)(\.\.\.)?$/, "..."));  
+            };  
+        });  
+        });  
+    </script>  
+    <style>  
+        .container  
+        {  
+            width: 300px;
+            background: #EEE;   
+            height: 3em;  
+            margin: 1em;  
+        }  
+        .container p  
+        {  
+            margin: 0; 
+            line-height: 1.5em;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div class="container">  
+        <p>  
+           基地发射的大幅答复基地发射的大幅答复基地发射的大幅答复基地发射的大幅答复基地发射的大幅答复基地发射的大幅答复基地发射的大幅答复基地发射的大幅答复基地发射的大幅答复基地发射的大幅答复基地发射的大幅答复基地发射的大幅答复基地发射的大幅答复基地发射的大幅答复基地发射的大幅答复</p>  
+    </div>  
+</body>  
+</html> 
