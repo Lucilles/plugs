@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>scroll事件</title>
+	<style>
+/*.demo{
+	height: 400px;
+	width: 100%;
+	background: #f00;
+	overflow: scroll;
+}*/
+.demo{
+	height: 1400px;
+	width: 100%;
+	background: green;
+	overflow: scroll;
+}
+/*.container{
+	height: 1600px;
+	width: 100%;
+	background: #f8f8f8;
+}*/
+	</style>
+	<script src="jquery1.11.js"></script>
+</head>
+<body>
+<div class="demo">
+<!-- 	<div class="container">
+		
+	</div> -->
+</div>
+
+<script>
+
+    //     $(document).ready(function () {            
+    //         $('.demo').scroll(function () {	
+    //         console.log($(this).scrollTop())			
+				// if ($(this).scrollTop() == ($('.container').height()/2)-200) {
+    //       alert('ok!!');
+    //    }
+    //         });
+    //     }); 
+    
+      $(document).ready(function () {            
+            $(window).scroll(function () {	
+            console.log($(this).scrollTop())			
+				if ($(this).scrollTop() == ($('.demo').height()/2)-200) {
+          alert('ok!!');
+       }
+            });
+        }); 
+
+// 滚动条要注意滚动的元素必须是包裹起来的，可以是被window包裹，也可以是被div包裹，监听其父元素的滚动事件，子元素的高度必须大于其父元素
+
+
+
+
+</script>
+</body>
+</html>
