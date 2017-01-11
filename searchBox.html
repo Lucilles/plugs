@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>searchBox</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="jquery1.11.js"></script>
+
+    <style>
+.search-bar {
+  width: 330px;
+  margin-top: 32px;
+}
+.search-bar .search-bar-body {
+  width: 265px;
+  height: 35px;
+  float: left;
+  border: 1px solid #d2d2d2;
+}
+.search-bar .search-bar-body .search-bar-select {
+  position: relative;
+  width: 70px;
+  height: 33px;
+  padding: 0px;
+  line-height: 33px;
+  text-align: left;
+  text-indent: 18px;
+  font-size: 12px;
+  background: #f8f8f8;
+  border-right: 1px solid #ececec;
+  cursor: pointer;
+  outline: none;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  float: left;
+}
+.search-bar .search-bar-body .search-bar-select .dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 0;
+  z-index: 10;
+  background: #f8f8f8;
+  border-top: none;
+  border-bottom: none;
+  list-style: none;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  max-height: 0;
+  overflow: hidden;
+}
+.search-bar .search-bar-body .search-bar-select:after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  margin-top: -3px;
+  border-width: 4px 4px 0 4px;
+  border-style: solid;
+  border-color: #d2d2d2 transparent;
+}.search-bar .search-bar-body .search-bar-select.active {
+  background: #21cace;
+  box-shadow: none;
+  border-bottom: none;
+  color: white;
+}
+.search-bar .search-bar-body .search-bar-select.active:after {
+  border-color: #d2d2d2 transparent;
+}
+.search-bar .search-bar-body .search-bar-select.active .dropdown {
+  max-height: 400px;
+}
+
+.search-bar .search-bar-body .search-bar-select .dropdown li a {
+  display: block;
+  text-decoration: none;
+  color: #666666;
+  transition: all 0.3s ease-out;
+}
+.search-bar .search-bar-body .search-bar-select .dropdown li:last-of-type a {
+  border: none;
+}
+.search-bar .search-bar-body .search-bar-select .dropdown li:hover a {
+  color: #21cace;
+}
+.search-bar .search-bar-body .search-bar-select.active .dropdown {
+  max-height: 400px;
+}
+.search-bar .search-bar-body input {
+  outline: 0;
+  border: 0px;
+  width: 192px;
+  height: 33px;
+  line-height: 33px;
+  font-size: 12px;
+  text-indent: 6px;
+}
+.search-bar .btn-search {
+  width: 35px;
+  height: 35px;
+  border: 0px;
+  padding: 0;
+  float: left;
+  outline: 0;
+}
+
+
+
+
+
+
+
+    </style>
+
+
+
+</head>
+<body>
+<div class="search-bar col-xs-4">
+    <div class="search-bar-body">
+        <div id="search-bar-select" class="search-bar-select" tabindex="1">
+            <span>家品</span>
+            <ul class="dropdown">
+                <li><a href="#">图库</a></li>
+                <li><a href="#">文章</a></li>
+                <li><a href="#">商品</a></li>
+                <li><a href="#">设计</a></li>
+            </ul>
+        </div>
+        <input type="text" class="input-medium search-query" placeholder="海量家品任你选">
+    </div>
+    <button type="submit" class="btn-search"><img src="icon-btn-search.png" height="35" width="35" alt=""></button>
+</div>
+
+
+<div class="search-bar col-xs-4">
+    <div class="search-bar-body">
+<!--         <div id="search-bar-select" class="search-bar-select" tabindex="1">
+            <span>家品</span>
+            <ul class="dropdown">
+                <li><a href="#">图库</a></li>
+                <li><a href="#">文章</a></li>
+                <li><a href="#">商品</a></li>
+                <li><a href="#">设计</a></li>
+            </ul>
+        </div> -->
+        <input type="text" class="input-medium search-query" placeholder="海量家品任你选">
+    </div>
+    <button type="submit" class="btn-search"><img src="icon-btn-search.png" height="35" width="35" alt=""></button>
+</div>
+<script>
+  $(function() {
+    initSiteSearchBoxDropDown();
+});
+
+function SiteSearchBoxDropDown(el) {
+    this.dd = el;
+    this.placeholder = this.dd.children('span');
+    this.opts = this.dd.find('ul.dropdown > li');
+    this.val = '';
+    this.index = -1;
+    this.initEvents();
+}
+
+SiteSearchBoxDropDown.prototype = {
+    initEvents : function() {
+        var obj = this;
+
+        obj.dd.on('click', function(event){
+            $(this).toggleClass('active');
+            return false;
+        });
+
+        obj.opts.on('click',function(){
+            var opt = $(this);
+            obj.val = opt.text();
+            obj.index = opt.index();
+            obj.placeholder.text(obj.val);
+        });
+    },
+    getValue : function() {
+        return this.val;
+    },
+    getIndex : function() {
+        return this.index;
+    }
+};
+
+function initSiteSearchBoxDropDown() {
+    var dd = new SiteSearchBoxDropDown( $('#search-bar-select') );
+
+    $(document).click(function() {
+        // all dropdowns
+        $('.search-bar-select').removeClass('active');
+    });
+}
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
